@@ -28,13 +28,17 @@ const HeroSlider = () => {
       >
         {data.map((item, i) => (
           <div className="slide" key={i} style={{ minWidth: "100%" }}>
+
             <img src={item.image} alt={item.title} />
+
             <div className="overlay"></div>
+
             <div className="content">
               <h1>{item.title}</h1>
               <p>{item.desc}</p>
               <button>{item.btn}</button>
             </div>
+            
           </div>
         ))}
       </div>
