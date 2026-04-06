@@ -1,0 +1,26 @@
+[
+  {
+    "title": "AI Project Demo",
+    "desc": "Biasness Detection from E-commerce Reviews",
+    "image": "https://thumbs.dreamstime.com/b/ai-machine-learning-hands-robot-human-touching-big-data-network-connection-background-science-artificial-intelligence-172987598.jpg",
+    "btn": "View Project"
+  },
+  {
+    "title": "Food Express",
+    "desc": "Food Express lets users order food directly through whatsapp with one click, making the process easy",
+    "image": "https://assets.epicurious.com/photos/689523e500efe724a5ef8bb5/16:9/w_2560%2Cc_limit/NABRAND-15854_HF_Refresh_PeakIIConcepts_2025-07_Shot01.jpg",
+    "btn": "Learn More"
+  },
+  {
+    "title": "Note App",
+    "desc": "A minimalist note taking app bulit with React.js and Tailwind CSS to create, edit, delete and organize their notes easily",
+    "image": "https://img.freepik.com/free-photo/boss-s-day-arrangement-with-sticky-notes_23-2148664076.jpg?semt=ais_incoming&w=740&q=80",
+    "btn": "Explore"
+  },
+  {
+    "title": "Quote Generator",
+    "desc": "A clean and simple web appthat displays motivational quotes based on user-entered topics",
+    "image": "https://thumbs.dreamstime.com/b/ai-machine-learning-hands-robot-human-touching-big-data-network-connection-background-science-artificial-intelligence-172987598.jpg",
+    "btn": "View Project"
+  }
+]
