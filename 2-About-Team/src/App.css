@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+body {
+  font-family: Arial;
+  padding: 20px;
+}
+
+.team {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+img {
+  width: 100%;
+}
