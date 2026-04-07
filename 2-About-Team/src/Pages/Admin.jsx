@@ -1,5 +1,5 @@
 import { useState } from "react";
-import teamData from "../data/team.json";
+import teamData from "../data/Team.json";
 
 const Admin = ({goBack}) => {
   const [team, setTeam] = useState(() => {
