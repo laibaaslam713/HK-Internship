@@ -26,7 +26,7 @@ const AboutPage = ({openAdmin}) => {
           HK Solutions
         </h1>
 
-        <p className="text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
+        <p className="text-xl text-center lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light">
           Connecting businesses to smarter digital futures — through strategy,
           software, and systems built for the real world.
         </p>
