@@ -2,7 +2,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const TeamCard = ({ member }) => {
   return (
-    <div className="group bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500 border border-white/50 backdrop-blur-sm relative overflow-hidden max-w-sm mx-auto">
+    <div className="group text-center bg-gradient-to-br from-white to-gray-50 p-8 rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500 border border-white/50 backdrop-blur-sm relative overflow-hidden max-w-sm mx-auto">
       <img
         src={member.image}
         alt={member.name}
