@@ -1,8 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import teamData from "../data/team.json";
 
 const Admin = ({goBack}) => {
-  const [team, setTeam] = useState([]);
+  const [team, setTeam] = useState(() => {
+    // lazy initialization: first check localStorage, then fallback to teamData
+    const stored = localStorage.getItem("team");
+    return stored ? JSON.parse(stored) : teamData;
+  });
   const [form, setForm] = useState({
     id: null,
     name: "",
@@ -14,10 +18,6 @@ const Admin = ({goBack}) => {
   });
   const [isEdit, setIsEdit] = useState(false);
 
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("team"));
-    setTeam(stored || teamData);
-  }, []);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
