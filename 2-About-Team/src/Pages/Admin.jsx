@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import teamData from "../data/Team.json";
+import teamData from "../data/team.json";
 
 const Admin = ({goBack}) => {
   const [team, setTeam] = useState([]);
@@ -61,20 +61,18 @@ const Admin = ({goBack}) => {
   return (
     <div className="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen p-4 sm:p-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-6">
-          <h2 className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+          <h2 className="text-center text-2xl lg:text-4xl font-bold">
             Admin Panel
           </h2>
           <button
             onClick={goBack}
-            className="px-8 py-4 bg-gradient-to-r from-gray-800 to-gray-900 text-white font-semibold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 border border-gray-700/50"
+            className="px-8 py-4 bg-gray-800 text-white font-semibold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-3d hover:-translate-y-1 transition-all duration-300 border border-gray-700/50"
           >
             ← Back to About
           </button>
         </div>
 
-        {/* Form */}
         <form
           onSubmit={handleSubmit}
           className="bg-white/80 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/50 mb-12 grid md:grid-cols-2 gap-6"
@@ -84,7 +82,7 @@ const Admin = ({goBack}) => {
             value={form.name}
             onChange={handleChange}
             placeholder="Full Name"
-            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
+            className="w-full p-3 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
             required
           />
 
@@ -93,7 +91,7 @@ const Admin = ({goBack}) => {
             value={form.role}
             onChange={handleChange}
             placeholder="Job Title"
-            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
+            className="w-full p-3 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
             required
           />
 
@@ -102,7 +100,7 @@ const Admin = ({goBack}) => {
             value={form.image}
             onChange={handleChange}
             placeholder="Image URL"
-            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
+            className="w-full p-3 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
           />
 
           <input
@@ -110,7 +108,7 @@ const Admin = ({goBack}) => {
             value={form.linkedin}
             onChange={handleChange}
             placeholder="LinkedIn URL"
-            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
+            className="w-full p-3 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
           />
 
           <input
@@ -118,7 +116,7 @@ const Admin = ({goBack}) => {
             value={form.github}
             onChange={handleChange}
             placeholder="GitHub URL"
-            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-gray-500/20 focus:border-gray-700 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
+            className="w-full p-3 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-gray-500/20 focus:border-gray-700 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
           />
 
           <textarea
@@ -132,13 +130,12 @@ const Admin = ({goBack}) => {
 
           <button
             type="submit"
-            className="md:col-span-2 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white py-6 px-12 rounded-3xl font-bold text-xl shadow-2xl hover:shadow-3xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-white/30"
+            className="md:col-span-2 bg-blue-700 hover:bg-gray-600  text-white py-3 px-12 rounded-3xl font-bold text-xl shadow-2xl hover:shadow-3xl hover:scale-3d hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-white/30"
           >
             {isEdit ? " Update Member" : " Add New Member"}
           </button>
         </form>
 
-        {/* Team Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {team.map(member => (
             <div

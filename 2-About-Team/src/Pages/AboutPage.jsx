@@ -8,7 +8,7 @@ const AboutPage = ({openAdmin}) => {
       <div className="max-w-6xl mx-auto">
         
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-4">
-          <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 
+          <button className="bg-blue-700 text-white px-6 py-3 
           rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all
            duration-300 transform">
             ABOUT US
