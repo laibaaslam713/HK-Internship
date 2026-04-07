@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import teamData from "../data/Team.json";
 
 const Admin = ({goBack}) => {
-
   const [team, setTeam] = useState([]);
   const [form, setForm] = useState({
     id: null,
@@ -13,7 +12,6 @@ const Admin = ({goBack}) => {
     linkedin: "",
     github: ""
   });
-
   const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
@@ -27,7 +25,6 @@ const Admin = ({goBack}) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     if (isEdit) {
       const updated = team.map(m => m.id === form.id ? form : m);
       setTeam(updated);
@@ -39,7 +36,6 @@ const Admin = ({goBack}) => {
       setTeam(updated);
       localStorage.setItem("team", JSON.stringify(updated));
     }
-
     setForm({
       id: null,
       name: "",
@@ -61,31 +57,34 @@ const Admin = ({goBack}) => {
     setForm(member);
     setIsEdit(true);
   }
+
   return (
-    <div className="bg-gray-100 min-h-screen p-6">
-      <div className="max-w-5xl mx-auto">
+    <div className="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen p-4 sm:p-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-6">
+          <h2 className="text-4xl lg:text-5xl font-black bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+            Admin Panel
+          </h2>
+          <button
+            onClick={goBack}
+            className="px-8 py-4 bg-gradient-to-r from-gray-800 to-gray-900 text-white font-semibold rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 border border-gray-700/50"
+          >
+            ← Back to About
+          </button>
+        </div>
 
-        <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Admin Panel</h2>
-
-        <button
-          onClick={goBack}
-          className="bg-gray-800 text-white px-4 py-2 rounded"
-        >
-          Back
-        </button>
-      </div>
-
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-6 rounded-xl shadow-sm mb-8 grid md:grid-cols-2 gap-4"
+          className="bg-white/80 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/50 mb-12 grid md:grid-cols-2 gap-6"
         >
           <input
             name="name"
             value={form.name}
             onChange={handleChange}
-            placeholder="Name"
-            className="border p-2 rounded"
+            placeholder="Full Name"
+            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
             required
           />
 
@@ -93,8 +92,8 @@ const Admin = ({goBack}) => {
             name="role"
             value={form.role}
             onChange={handleChange}
-            placeholder="Role"
-            className="border p-2 rounded"
+            placeholder="Job Title"
+            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
             required
           />
 
@@ -103,7 +102,7 @@ const Admin = ({goBack}) => {
             value={form.image}
             onChange={handleChange}
             placeholder="Image URL"
-            className="border p-2 rounded"
+            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
           />
 
           <input
@@ -111,7 +110,7 @@ const Admin = ({goBack}) => {
             value={form.linkedin}
             onChange={handleChange}
             placeholder="LinkedIn URL"
-            className="border p-2 rounded"
+            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
           />
 
           <input
@@ -119,51 +118,58 @@ const Admin = ({goBack}) => {
             value={form.github}
             onChange={handleChange}
             placeholder="GitHub URL"
-            className="border p-2 rounded"
+            className="w-full p-5 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-gray-500/20 focus:border-gray-700 transition-all duration-300 text-lg placeholder-gray-400 bg-gray-50/50 hover:bg-white"
           />
 
           <textarea
             name="bio"
             value={form.bio}
             onChange={handleChange}
-            placeholder="Bio"
-            className="border p-2 rounded md:col-span-2"
+            placeholder="Short Bio"
+            className="border border-gray-200 p-5 rounded-2xl md:col-span-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-300 text-lg placeholder-gray-400 resize-vertical bg-gray-50/50 hover:bg-white min-h-[120px]"
+            rows="3"
           />
 
           <button
             type="submit"
-            className="bg-blue-600 text-white py-2 rounded md:col-span-2"
+            className="md:col-span-2 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white py-6 px-12 rounded-3xl font-bold text-xl shadow-2xl hover:shadow-3xl hover:scale-105 hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-white/30"
           >
-            {isEdit ? "Update Member" : "Add Member"}
+            {isEdit ? " Update Member" : " Add New Member"}
           </button>
         </form>
 
-        {/* Team List */}
-        <div className="grid md:grid-cols-3 gap-4">
+        {/* Team Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {team.map(member => (
             <div
               key={member.id}
-              className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition"
+              className="group bg-white/70 backdrop-blur-sm p-6 rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500 border border-white/60 overflow-hidden"
             >
               <img
-                src={member.image}
-                className="w-16 h-16 rounded-full mx-auto mb-2"
+                src={member.image || "https://via.placeholder.com/150"}
+                className="w-20 h-20 rounded-3xl mx-auto mb-4 shadow-2xl group-hover:scale-110 group-hover:ring-4 group-hover:ring-blue-200/50 transition-all duration-500 object-cover"
+                alt={member.name}
               />
 
-              <h3 className="text-center font-semibold">{member.name}</h3>
-              <p className="text-center text-blue-500 text-sm">{member.role}</p>
+              <h3 className="text-center font-black text-xl text-black transition-all">
+                {member.name}
+              </h3>
+              
+              <p className="text-center font-semibold text-lg text-blue-400 mb-6 px-3 py-1 inline-block rounded-full">
+                {member.role}
+              </p>
 
-              <div className="flex justify-center gap-2 mt-3">
+              <div className="flex gap-3 justify-center">
                 <button
                   onClick={() => editMember(member)}
-                  className="bg-yellow-400 px-3 py-1 rounded text-sm"
+                  className="flex-1 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-semibold py-3 px-4 rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-yellow-300/50"
                 >
                   Edit
                 </button>
 
                 <button
                   onClick={() => deleteMember(member.id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded text-sm"
+                  className="flex-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 px-4 rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-red-400/50"
                 >
                   Delete
                 </button>
@@ -171,10 +177,9 @@ const Admin = ({goBack}) => {
             </div>
           ))}
         </div>
-
       </div>
     </div>
   )
 }
 
-export default Admin
+export default Admin;
