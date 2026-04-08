@@ -6,7 +6,6 @@ const Footer = () => {
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
 
-        {/* Left - Logo / About */}
         <div>
           <h2 className="text-2xl font-bold text-cyan-400 mb-4">
             HK Solutions
@@ -17,7 +16,6 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Middle - Quick Links */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2 text-gray-400 text-sm">
@@ -28,7 +26,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Right - Socials */}
         <div>
           <h3 className="text-lg font-semibold mb-4">Connect</h3>
           <div className="flex gap-4 text-gray-400 text-sm">
@@ -40,7 +37,6 @@ const Footer = () => {
 
       </div>
 
-      {/* Bottom */}
       <div className="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500 text-sm">
         © {new Date().getFullYear()} HK Solutions. All rights reserved.
       </div>
