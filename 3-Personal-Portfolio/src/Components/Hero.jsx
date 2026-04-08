@@ -15,7 +15,7 @@ const Hero = () => {
 
         <div className="absolute inset-0 flex flex-col justify-center text-white px-4 ml-20">
           <p className='text-cyan-300'>🟢 Open To Work</p>
-          <h1 className="text-6xl md:text-6xl font-bold mb-4 text-9xl">
+          <h1 className="text-6xl md:text-6xl font-bold mb-4 text-4xl md:text-6xl lg:text-8xl">
             <span>We Craft</span><br /> 
             <span className='text-cyan-300'>Digital</span> <br /> 
             <span>Experiences</span>
