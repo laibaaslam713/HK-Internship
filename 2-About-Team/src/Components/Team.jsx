@@ -6,10 +6,8 @@ const Team = () => {
   const [search, setSearch] = useState("");
   const [role, setRole] = useState("All");
 
-  // Unique roles
   const roles = ["All", ...new Set(teamData.map((m) => m.role))];
 
-  // Filter logic
   const filteredMembers = teamData.filter((member) => {
     return (
       member.name.toLowerCase().includes(search.toLowerCase()) &&
