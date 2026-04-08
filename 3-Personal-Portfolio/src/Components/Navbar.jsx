@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className='flex justify-around p-5'>
             <a href="#">
                 <span className='bg-cyan-300 p-2 rounded-lg font-bold text-black'>HK</span>
-                <span>HK Solutions</span>
+                <span className='ml-2 font-bold'>HK Solutions</span>
             </a>
 
             <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden">
@@ -18,11 +18,11 @@ const Navbar = () => {
                 menuOpen ? 'block' : 'hidden'
                 } md:flex`}
             >
-                <a href="#hero">Home</a>
-                <a href="#services" >Services</a>
-                <a href="#about">About</a>
-                <a href="#portfolio">Work</a>
-                <a href="#contact">Let's Talk</a>
+                <a href="#hero" className='hover:text-cyan-300 '>Home</a>
+                <a href="#services" className='hover:text-cyan-300 '>Services</a>
+                <a href="#about" className='hover:text-cyan-300 '>About</a>
+                <a href="#portfolio" className='hover:text-cyan-300 '>Work</a>
+                <a href="#contact" className='hover:text-cyan-300 '>Let's Talk</a>
             </nav>
         </div>
     </header>
