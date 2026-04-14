@@ -1,14 +1,14 @@
 import ThemeToggle from "./components/ThemeToggle";
 import Card from "./components/Card";
 import "./App.css";
-import biryani from "./assets/biryani.jfif"
+import biryani from "./assets/biryani.webp"
 import burger from "./assets/beef-burger.jpg"
-import vegPasta from "./assets/veg-pasta.jpg"
-import chocolateCake from "./assets/chocolate-cake.jfif"
-import salad from "./assets/salad.jpg"
-import bbqPizza from "./assets/bbq-pizza.png"
-import brownie from "./assets/brownie.jpg"
-import chapliKabab from "./assets/chapliKaba.jpg"
+import vegPasta from "./assets/veg-pasta.webp"
+import chocolateCake from "./assets/chocolate-cake.webp"
+import salad from "./assets/salad.webp"
+import bbqPizza from "./assets/bbq-pizza.webp"
+import brownie from "./assets/brownie.webp"
+import chapliKabab from "./assets/chapliKaba.webp"
 import { CookingPot } from "lucide-react";
 
 
