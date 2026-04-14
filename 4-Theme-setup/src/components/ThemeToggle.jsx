@@ -5,17 +5,16 @@ import { Sun, Moon } from "lucide-react";
 const ThemeToggle = () => {
   const [darkMode, setDarkMode] = useState(false);
 
-  // Load theme on first render
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
+  const savedTheme = localStorage.getItem("theme");
 
-    if (savedTheme === "dark") {
-      setDarkMode(true);
-      document.body.classList.add("dark");
-    }
-  }, []);
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
+}, []);
 
-  // Toggle theme
   const toggleTheme = () => {
     if (darkMode) {
       document.body.classList.remove("dark");
