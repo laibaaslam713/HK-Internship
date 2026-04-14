@@ -8,7 +8,7 @@ import chocolateCake from "./assets/chocolate-cake.webp"
 import salad from "./assets/salad.webp"
 import bbqPizza from "./assets/bbq-pizza.webp"
 import brownie from "./assets/brownie.webp"
-import chapliKabab from "./assets/chapliKaba.webp"
+import chapliKabab from "./assets/chaplikaba.webp"
 import { CookingPot } from "lucide-react";
 
 
