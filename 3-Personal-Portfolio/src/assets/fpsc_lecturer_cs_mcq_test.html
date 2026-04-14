@@ -1,0 +1,364 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  #app { padding: 1rem 0; }
+  .header { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); border: 0.5px solid var(--color-border-tertiary); padding: 1rem 1.25rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .timer { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+  .timer.warn { color: #E24B4A; }
+  .stats { display: flex; gap: 16px; font-size: 13px; color: var(--color-text-secondary); }
+  .stat-val { font-weight: 500; color: var(--color-text-primary); }
+  .q-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 0.75rem; }
+  .q-meta { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; }
+  .q-text { font-size: 15px; color: var(--color-text-primary); line-height: 1.6; margin-bottom: 1rem; font-weight: 500; }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt { padding: 10px 14px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); cursor: pointer; font-size: 14px; color: var(--color-text-primary); background: var(--color-background-primary); text-align: left; transition: background 0.15s; }
+  .opt:hover { background: var(--color-background-secondary); border-color: var(--color-border-secondary); }
+  .opt.selected { background: #E6F1FB; border-color: #378ADD; color: #0C447C; }
+  .opt.correct { background: #EAF3DE; border-color: #639922; color: #27500A; }
+  .opt.wrong { background: #FCEBEB; border-color: #E24B4A; color: #791F1F; }
+  .opt.reveal { background: #EAF3DE; border-color: #639922; color: #27500A; }
+  .explanation { margin-top: 10px; font-size: 13px; color: var(--color-text-secondary); background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 8px 12px; line-height: 1.6; display: none; }
+  .explanation.show { display: block; }
+  .nav { display: flex; gap: 8px; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .btn { padding: 8px 20px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); cursor: pointer; font-size: 14px; }
+  .btn:hover { background: var(--color-background-secondary); }
+  .btn.primary { background: #378ADD; border-color: #185FA5; color: #fff; }
+  .btn.primary:hover { background: #185FA5; }
+  .progress { height: 4px; background: var(--color-background-secondary); border-radius: 4px; margin-bottom: 1rem; }
+  .progress-bar { height: 4px; background: #378ADD; border-radius: 4px; transition: width 0.3s; }
+  .result-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 2rem; text-align: center; }
+  .result-score { font-size: 48px; font-weight: 500; color: var(--color-text-primary); }
+  .result-label { font-size: 14px; color: var(--color-text-secondary); margin-top: 4px; }
+  .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.5rem 0; }
+  .result-metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px; }
+  .result-metric .val { font-size: 24px; font-weight: 500; }
+  .result-metric .lbl { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+  .q-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--color-background-secondary); font-size: 11px; margin-right: 4px; }
+  .palette { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 1rem; }
+  .pq { width: 28px; height: 28px; border-radius: 4px; border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center; font-size: 10px; cursor: pointer; color: var(--color-text-secondary); }
+  .pq.answered { background: #E6F1FB; border-color: #378ADD; color: #0C447C; }
+  .pq.current { border-color: #E24B4A; font-weight: 500; }
+  .section-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); margin-bottom: 6px; background: var(--color-background-info, #E6F1FB); color: #0C447C; border: 0.5px solid #B5D4F4; }
+</style>
+
+<div id="app">
+  <div id="start-screen">
+    <div style="background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 2rem; text-align: center;">
+      <h2 style="font-size: 20px; font-weight: 500; margin-bottom: 8px;">FPSC Lecturer Computer Science</h2>
+      <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 1.5rem;">100 MCQs &nbsp;|&nbsp; 90 minutes &nbsp;|&nbsp; −0.25 negative marking</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; text-align: left;">
+        <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px; font-size: 13px;">
+          <div style="font-weight: 500; margin-bottom: 4px;">Part-I (20 marks)</div>
+          <div style="color: var(--color-text-secondary);">English: Vocabulary, Grammar, Sentence Structuring</div>
+        </div>
+        <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px; font-size: 13px;">
+          <div style="font-weight: 500; margin-bottom: 4px;">Part-II (50 marks)</div>
+          <div style="color: var(--color-text-secondary);">CS Masters: Hardware, Networking, C/C++, OS, DB, Web</div>
+        </div>
+        <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px; font-size: 13px; grid-column: span 2;">
+          <div style="font-weight: 500; margin-bottom: 4px;">Part-III (30 marks)</div>
+          <div style="color: var(--color-text-secondary);">Teaching Techniques, Classroom Management, Testing, Bloom's Taxonomy</div>
+        </div>
+      </div>
+      <button class="btn primary" onclick="startTest()" style="font-size: 15px; padding: 10px 32px;">Start Test ↗</button>
+    </div>
+  </div>
+  <div id="test-screen" style="display:none;">
+    <div class="header">
+      <div>
+        <div style="font-size: 12px; color: var(--color-text-secondary);">Time Remaining</div>
+        <div class="timer" id="timer">90:00</div>
+      </div>
+      <div class="stats">
+        <div><span class="stat-val" id="s-answered">0</span><br>answered</div>
+        <div><span class="stat-val" id="s-correct" style="color:#639922">0</span><br>correct</div>
+        <div><span class="stat-val" id="s-wrong" style="color:#E24B4A">0</span><br>wrong</div>
+        <div><span class="stat-val" id="s-score">0.00</span><br>score</div>
+      </div>
+    </div>
+    <div class="progress"><div class="progress-bar" id="prog"></div></div>
+    <div class="palette" id="palette"></div>
+    <div id="q-area"></div>
+    <div class="nav">
+      <button class="btn" onclick="prevQ()">← Prev</button>
+      <span style="font-size: 13px; color: var(--color-text-secondary);" id="q-counter">1 / 100</span>
+      <button class="btn" onclick="nextQ()">Next →</button>
+    </div>
+    <div style="text-align: center; margin-top: 1rem;">
+      <button class="btn" style="border-color:#E24B4A; color:#E24B4A;" onclick="submitTest()">Submit Test</button>
+    </div>
+  </div>
+  <div id="result-screen" style="display:none;"></div>
+</div>
+
+<script>
+const ALL_QUESTIONS = [
+  {s:"Part-I: English",q:"Which word is the correct synonym of 'Eloquent'?",o:["Articulate","Silent","Confused","Harsh"],a:0,e:"Eloquent means fluent or persuasive in speaking/writing. Articulate is its synonym."},
+  {s:"Part-I: English",q:"Choose the correct sentence:",o:["She don't know the answer.","She doesn't knows the answer.","She doesn't know the answer.","She not know the answer."],a:2,e:"With third-person singular subjects, use 'doesn't' + base form of verb."},
+  {s:"Part-I: English",q:"The antonym of 'Verbose' is:",o:["Wordy","Concise","Talkative","Lengthy"],a:1,e:"Verbose means using more words than needed. Its antonym is Concise."},
+  {s:"Part-I: English",q:"Choose the word that best completes: 'The committee _____ divided on the issue.'",o:["was","were","is being","have been"],a:0,e:"'Committee' is a collective noun treated as singular in formal usage."},
+  {s:"Part-I: English",q:"Identify the correct sentence structure:",o:["Although he studied, but he failed.","Although he studied, he failed.","He studied although but he failed.","He studied but although he failed."],a:1,e:"'Although' is a subordinating conjunction — do not pair it with 'but'."},
+  {s:"Part-I: English",q:"'Perspicacious' means:",o:["Dull","Quick-witted","Lazy","Stubborn"],a:1,e:"Perspicacious means having a ready insight into things; shrewd."},
+  {s:"Part-I: English",q:"Which sentence uses the passive voice correctly?",o:["The cat chased the mouse.","The mouse was chased by the cat.","The mouse chased the cat.","The cat is chasing the mouse."],a:1,e:"Passive voice: subject receives the action. 'The mouse was chased by the cat.'"},
+  {s:"Part-I: English",q:"'Ameliorate' means:",o:["Worsen","Make better","Ignore","Destroy"],a:1,e:"Ameliorate means to make something bad or unsatisfactory better."},
+  {s:"Part-I: English",q:"Choose the correctly punctuated sentence:",o:["Its a beautiful day isnt it?","It's a beautiful day, isn't it?","Its a beautiful day, isnt it?","It's a beautiful day isn't it?"],a:1,e:"'It's' = contraction of it is. 'Isn't' needs an apostrophe. Comma before tag question."},
+  {s:"Part-I: English",q:"The word 'Ephemeral' means:",o:["Eternal","Short-lived","Massive","Complex"],a:1,e:"Ephemeral means lasting for a very short time."},
+  {s:"Part-I: English",q:"Choose the correct form: 'Neither of the students _____ completed the assignment.'",o:["have","has","had been","were"],a:1,e:"'Neither' takes a singular verb: 'has'."},
+  {s:"Part-I: English",q:"Which is an example of a compound sentence?",o:["She ran fast.","She ran, and he walked.","Although she ran, she was late.","Running fast, she arrived on time."],a:1,e:"A compound sentence joins two independent clauses with a coordinating conjunction."},
+  {s:"Part-I: English",q:"The idiom 'Bite the bullet' means:",o:["To eat fast","To endure a painful situation","To shoot quickly","To argue fiercely"],a:1,e:"'Bite the bullet' means to endure a painful or difficult situation."},
+  {s:"Part-I: English",q:"Identify the error: 'He is one of the students who has passed.'",o:["one of","who","has","passed"],a:2,e:"'Who' refers to 'students' (plural), so 'have' is correct, not 'has'."},
+  {s:"Part-I: English",q:"'Ubiquitous' means:",o:["Rare","Present everywhere","Ancient","Unique"],a:1,e:"Ubiquitous means present, appearing, or found everywhere."},
+  {s:"Part-I: English",q:"Which sentence is grammatically correct?",o:["I am looking forward to meet you.","I am looking forward to meeting you.","I am looking forward meeting you.","I look forward to meet you."],a:1,e:"'Look forward to' is followed by a gerund (verb+ing), not infinitive."},
+  {s:"Part-I: English",q:"The synonym of 'Candid' is:",o:["Honest","Dishonest","Timid","Angry"],a:0,e:"Candid means truthful and straightforward — synonym is Honest."},
+  {s:"Part-I: English",q:"Choose the correct sentence:",o:["He laid in bed all day.","He lied in bed all day.","He lay in bed all day.","He lain in bed all day."],a:2,e:"Past tense of 'lie' (to recline) is 'lay'. 'Lay' (to place) would be 'laid'."},
+  {s:"Part-I: English",q:"'Procrastinate' means:",o:["To act quickly","To delay or postpone","To study hard","To work overnight"],a:1,e:"Procrastinate means to delay or postpone action."},
+  {s:"Part-I: English",q:"Which word correctly fills the blank: 'The data _____ inconclusive.'",o:["is","are","was being","will"],a:1,e:"'Data' is plural (datum = singular), so 'are' is technically correct in formal usage."},
+  {s:"Part-II: Hardware/Software",q:"Which component is considered the 'brain' of a computer?",o:["RAM","Hard Disk","CPU","GPU"],a:2,e:"The CPU (Central Processing Unit) processes instructions and is called the brain."},
+  {s:"Part-II: Hardware/Software",q:"ROM stands for:",o:["Read Only Memory","Random Output Memory","Read Output Module","Random Optical Memory"],a:0,e:"ROM = Read Only Memory. It retains data without power and stores firmware."},
+  {s:"Part-II: Hardware/Software",q:"Which type of software manages hardware resources?",o:["Application software","Operating System","Compiler","Database software"],a:1,e:"The Operating System manages hardware resources and provides services to applications."},
+  {s:"Part-II: Hardware/Software",q:"A compiler converts:",o:["Machine code to assembly","High-level language to machine code","Binary to decimal","Object code to source code"],a:1,e:"A compiler translates high-level source code into machine code all at once."},
+  {s:"Part-II: Hardware/Software",q:"Which memory is fastest?",o:["HDD","SSD","RAM","Cache"],a:3,e:"Cache memory is closest to the CPU and is the fastest type of memory."},
+  {s:"Part-II: Data Comm & Networking",q:"IP address version 4 uses how many bits?",o:["16","32","64","128"],a:1,e:"IPv4 uses 32 bits (4 octets), allowing ~4.3 billion addresses."},
+  {s:"Part-II: Data Comm & Networking",q:"Which protocol is used for sending email?",o:["HTTP","FTP","SMTP","DNS"],a:2,e:"SMTP (Simple Mail Transfer Protocol) is used for sending email."},
+  {s:"Part-II: Data Comm & Networking",q:"The OSI model has how many layers?",o:["5","6","7","8"],a:2,e:"The OSI model has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application."},
+  {s:"Part-II: Data Comm & Networking",q:"Which layer of the OSI model handles routing?",o:["Data Link","Transport","Network","Session"],a:2,e:"The Network layer (Layer 3) is responsible for routing packets."},
+  {s:"Part-II: Data Comm & Networking",q:"What does DNS stand for?",o:["Data Network System","Domain Name System","Digital Network Service","Dynamic Name Server"],a:1,e:"DNS (Domain Name System) translates domain names to IP addresses."},
+  {s:"Part-II: C/C++ Language",q:"What is the output of: int x=5; cout << x++;",o:["6","5","4","Error"],a:1,e:"x++ is post-increment: the original value (5) is used in the expression, then incremented."},
+  {s:"Part-II: C/C++ Language",q:"Which keyword is used to prevent a class from being inherited in C++?",o:["static","private","final","sealed"],a:2,e:"'final' keyword (C++11) prevents a class from being used as a base class."},
+  {s:"Part-II: C/C++ Language",q:"What is the size of int on a 32-bit system (typically)?",o:["1 byte","2 bytes","4 bytes","8 bytes"],a:2,e:"On most 32-bit systems, int is 4 bytes (32 bits)."},
+  {s:"Part-II: C/C++ Language",q:"In C++, a constructor is called:",o:["When an object is destroyed","When an object is created","When a function returns","When a class is defined"],a:1,e:"A constructor is automatically called when an object of a class is created."},
+  {s:"Part-II: C/C++ Language",q:"Which concept of OOP binds data and functions together?",o:["Inheritance","Polymorphism","Encapsulation","Abstraction"],a:2,e:"Encapsulation wraps data (attributes) and methods (functions) into a single unit (class)."},
+  {s:"Part-II: C/C++ Language",q:"What does 'virtual' keyword do in C++?",o:["Creates a static function","Enables compile-time binding","Enables runtime polymorphism","Prevents overriding"],a:2,e:"Virtual functions enable runtime (dynamic) polymorphism through function overriding."},
+  {s:"Part-II: C/C++ Language",q:"Pointer to a pointer in C++ is declared as:",o:["*ptr","**ptr","&ptr","&&ptr"],a:1,e:"A pointer to a pointer is declared using double asterisks: int **ptr."},
+  {s:"Part-II: C/C++ Language",q:"Which header file is used for input/output in C++?",o:["stdio.h","conio.h","iostream","stdlib.h"],a:2,e:"#include <iostream> provides cin and cout for I/O in C++."},
+  {s:"Part-II: Visual Basic",q:"Which control is used to accept text input in Visual Basic?",o:["Label","TextBox","Button","ComboBox"],a:1,e:"TextBox control allows the user to enter or display text."},
+  {s:"Part-II: Visual Basic",q:"In VB, 'MsgBox' is used to:",o:["Accept input","Display a message","Create a form","Define a variable"],a:1,e:"MsgBox displays a dialog box with a message and returns user's response."},
+  {s:"Part-II: Operating System",q:"What is deadlock in OS?",o:["A process running too long","Two processes waiting for each other indefinitely","A CPU overheating","Memory overflow"],a:1,e:"Deadlock occurs when two or more processes wait for each other's resources indefinitely."},
+  {s:"Part-II: Operating System",q:"Which scheduling algorithm gives priority to the shortest job?",o:["FCFS","Round Robin","SJF","Priority Scheduling"],a:2,e:"SJF (Shortest Job First) executes the process with the smallest burst time next."},
+  {s:"Part-II: Operating System",q:"In Unix/Linux, which command lists files in a directory?",o:["dir","list","ls","show"],a:2,e:"'ls' command lists directory contents in Unix/Linux systems."},
+  {s:"Part-II: Operating System",q:"What is the function of a semaphore?",o:["File management","Process synchronization","Memory allocation","CPU scheduling"],a:1,e:"Semaphores are used for process synchronization to prevent race conditions."},
+  {s:"Part-II: Operating System",q:"Virtual memory allows:",o:["Faster CPU processing","Running programs larger than physical RAM","Permanent data storage","Hardware abstraction only"],a:1,e:"Virtual memory uses disk space to extend RAM, allowing larger programs to run."},
+  {s:"Part-II: Operating System",q:"In Windows 10/11, which command opens Task Manager?",o:["Ctrl+Alt+F4","Ctrl+Shift+Esc","Ctrl+Alt+Tab","Win+R"],a:1,e:"Ctrl+Shift+Esc directly opens Task Manager in Windows."},
+  {s:"Part-II: Operating System",q:"Which file system is commonly used by Windows 10/11?",o:["FAT16","FAT32","NTFS","ext4"],a:2,e:"NTFS (New Technology File System) is the default file system for modern Windows."},
+  {s:"Part-II: Operating System",q:"A process in Unix that has finished but whose parent hasn't read its status is called:",o:["Orphan process","Zombie process","Daemon process","Sleeping process"],a:1,e:"A zombie process has completed execution but still has an entry in the process table."},
+  {s:"Part-II: Windows 10/11",q:"Which feature in Windows 10 allows apps to run in multiple desktops?",o:["Cortana","Task View","Action Center","Snap Assist"],a:1,e:"Task View allows creating and switching between virtual desktops."},
+  {s:"Part-II: Windows 10/11",q:"BitLocker in Windows is used for:",o:["Virus scanning","Disk encryption","File compression","Network management"],a:1,e:"BitLocker is a drive encryption feature to protect data on drives."},
+  {s:"Part-II: Oracle/PLSQL",q:"In SQL, which command is used to remove all rows from a table without deleting the table?",o:["DELETE","DROP","TRUNCATE","REMOVE"],a:2,e:"TRUNCATE removes all rows quickly without logging individual row deletions."},
+  {s:"Part-II: Oracle/PLSQL",q:"What does PL/SQL stand for?",o:["Procedural Language/SQL","Programming Language/SQL","Process Language/SQL","Primary Language/SQL"],a:0,e:"PL/SQL = Procedural Language extensions to SQL, Oracle's procedural extension."},
+  {s:"Part-II: Oracle/PLSQL",q:"Which SQL clause is used to filter records?",o:["ORDER BY","GROUP BY","HAVING","WHERE"],a:3,e:"WHERE clause filters rows based on a condition before grouping."},
+  {s:"Part-II: Oracle/PLSQL",q:"A PRIMARY KEY constraint:",o:["Allows NULL values","Allows duplicate values","Does not allow NULL or duplicates","Only prevents NULLs"],a:2,e:"A PRIMARY KEY must be unique and cannot contain NULL values."},
+  {s:"Part-II: Oracle/PLSQL",q:"Which PL/SQL block handles exceptions?",o:["DECLARE","BEGIN","EXCEPTION","END"],a:2,e:"The EXCEPTION block in PL/SQL handles runtime errors."},
+  {s:"Part-II: System Analysis & Design",q:"DFD stands for:",o:["Data Flow Diagram","Dynamic Function Design","Data Function Database","Design Flow Document"],a:0,e:"DFD = Data Flow Diagram, used to represent data flow in a system."},
+  {s:"Part-II: System Analysis & Design",q:"In SDLC, which phase comes after requirements gathering?",o:["Testing","Coding","System Design","Maintenance"],a:2,e:"After requirements gathering, the next phase is System Design."},
+  {s:"Part-II: System Analysis & Design",q:"Which model is also known as the 'Waterfall model's improvement'?",o:["Spiral Model","RAD Model","Iterative Model","Prototype Model"],a:0,e:"The Spiral Model combines Waterfall and prototyping with risk analysis at each iteration."},
+  {s:"Part-II: System Analysis & Design",q:"ERD is used to:",o:["Design network topology","Show data relationships","Write code","Test software"],a:1,e:"ERD (Entity-Relationship Diagram) models data and the relationships between data entities."},
+  {s:"Part-II: System Analysis & Design",q:"Which SDLC model is best for projects with unclear requirements?",o:["Waterfall","V-Model","Agile","Big Bang"],a:2,e:"Agile is iterative and flexible, best suited for evolving or unclear requirements."},
+  {s:"Part-II: Web Programming",q:"HTML stands for:",o:["Hyper Text Markup Language","High Text Machine Language","Hyper Transfer Markup Language","Hyper Tool Markup Language"],a:0,e:"HTML = HyperText Markup Language, the standard markup language for web pages."},
+  {s:"Part-II: Web Programming",q:"Which CSS property changes text color?",o:["background","font-style","color","text-shadow"],a:2,e:"The CSS 'color' property sets the color of text."},
+  {s:"Part-II: Web Programming",q:"In JavaScript, 'typeof null' returns:",o:["null","object","undefined","string"],a:1,e:"A known JavaScript quirk: typeof null returns 'object' (historical bug)."},
+  {s:"Part-II: Web Programming",q:"Which HTML tag is used for the largest heading?",o:["<h6>","<head>","<h1>","<title>"],a:2,e:"<h1> defines the largest/most important heading in HTML."},
+  {s:"Part-II: Web Programming",q:"HTTP status code 404 means:",o:["Server Error","Not Found","Forbidden","Redirect"],a:1,e:"HTTP 404 means the requested resource was not found on the server."},
+  {s:"Part-II: Web Programming",q:"Which language is used for styling web pages?",o:["HTML","JavaScript","CSS","PHP"],a:2,e:"CSS (Cascading Style Sheets) is used for styling and layout of web pages."},
+  {s:"Part-II: Web Programming",q:"What does SQL injection exploit?",o:["Weak passwords","Unvalidated user input in database queries","Network vulnerabilities","OS flaws"],a:1,e:"SQL injection inserts malicious SQL code into input fields to manipulate databases."},
+  {s:"Part-III: Teaching",q:"Which teaching method is most student-centered?",o:["Lecture method","Discovery learning","Demonstration","Rote learning"],a:1,e:"Discovery learning encourages students to find answers themselves — most student-centered."},
+  {s:"Part-III: Teaching",q:"Cooperative learning involves:",o:["Students working individually","Teacher lecturing only","Students working in groups toward shared goals","Self-paced online learning"],a:2,e:"Cooperative learning has students work together toward common learning goals."},
+  {s:"Part-III: Teaching",q:"The 'Socratic method' involves:",o:["Giving direct answers","Questioning to stimulate critical thinking","Reading from textbooks","Showing videos"],a:1,e:"The Socratic method uses questioning to help students examine their assumptions."},
+  {s:"Part-III: Teaching",q:"Inductive teaching method moves from:",o:["General to specific","Specific to general","Theory to practice","Abstract to concrete"],a:1,e:"Inductive method starts with specific examples and leads to general principles."},
+  {s:"Part-III: Teaching",q:"Problem-based learning (PBL) primarily develops:",o:["Memorization","Critical thinking and problem-solving","Writing speed","Exam techniques"],a:1,e:"PBL uses real-world problems to develop critical thinking and problem-solving skills."},
+  {s:"Part-III: Teaching",q:"Which is NOT a characteristic of effective teaching?",o:["Clarity","Flexibility","Monotony","Feedback"],a:2,e:"Monotony (lack of variety) is ineffective in teaching. Effective teachers are dynamic."},
+  {s:"Part-III: Teaching",q:"Microteaching is used to:",o:["Teach large classes","Develop and refine teaching skills in a controlled setting","Assess student performance","Plan curriculum"],a:1,e:"Microteaching involves short, focused practice sessions to improve specific teaching skills."},
+  {s:"Part-III: Classroom Management",q:"The best way to handle classroom disruption is:",o:["Punish immediately","Ignore always","Address calmly and redirect","Send student out always"],a:2,e:"Effective classroom management involves calm, constructive redirection of behavior."},
+  {s:"Part-III: Classroom Management",q:"Seating arrangement in a classroom primarily affects:",o:["Only aesthetics","Student interaction and learning","The teacher's comfort","Building structure"],a:1,e:"Seating arrangements significantly impact student interaction, engagement, and learning."},
+  {s:"Part-III: Classroom Management",q:"Positive reinforcement in classroom means:",o:["Punishing bad behavior","Ignoring all behavior","Rewarding desired behavior","Removing privileges"],a:2,e:"Positive reinforcement increases desired behavior by providing a reward after the behavior."},
+  {s:"Part-III: Classroom Management",q:"Rules in a classroom should be:",o:["Made by teacher alone","Few, clear, and consistent","Changed daily","Kept secret from students"],a:1,e:"Effective classroom rules are few, clearly stated, consistently enforced, and known to students."},
+  {s:"Part-III: Testing & Evaluation",q:"Formative assessment is conducted:",o:["Only at the end of course","During the learning process","Before admission","After graduation"],a:1,e:"Formative assessment occurs during learning to provide ongoing feedback."},
+  {s:"Part-III: Testing & Evaluation",q:"Summative assessment is meant to:",o:["Help during learning","Evaluate learning at the end of a period","Diagnose learning difficulties","Provide daily feedback"],a:1,e:"Summative assessment evaluates learning at the end of a unit, term, or course."},
+  {s:"Part-III: Testing & Evaluation",q:"Reliability of a test means:",o:["It tests what it claims","It gives consistent results","It is easy","It is lengthy"],a:1,e:"Reliability means the test produces consistent, stable results under similar conditions."},
+  {s:"Part-III: Testing & Evaluation",q:"Validity of a test means:",o:["It is long","It gives same results always","It measures what it is supposed to measure","It is objective"],a:2,e:"Validity means the test accurately measures what it is designed to measure."},
+  {s:"Part-III: Testing & Evaluation",q:"Which type of test item has only one correct answer?",o:["Essay type","Short answer","Objective type","Descriptive"],a:2,e:"Objective type items (MCQ, True/False) have one correct answer with no ambiguity."},
+  {s:"Part-III: Testing & Evaluation",q:"Diagnostic testing is used to:",o:["Grade students","Identify learning difficulties","Rank students","Certify completion"],a:1,e:"Diagnostic assessment identifies specific learning difficulties before instruction."},
+  {s:"Part-III: Bloom's Taxonomy",q:"Bloom's Taxonomy was published in:",o:["1948","1956","1964","1972"],a:1,e:"Bloom's Taxonomy of Educational Objectives was published in 1956."},
+  {s:"Part-III: Bloom's Taxonomy",q:"Which is the highest level in the original Bloom's Taxonomy?",o:["Analysis","Synthesis","Evaluation","Application"],a:2,e:"In the original taxonomy, Evaluation is the highest cognitive level."},
+  {s:"Part-III: Bloom's Taxonomy",q:"In the revised Bloom's Taxonomy, the highest level is:",o:["Evaluating","Creating","Analyzing","Remembering"],a:1,e:"Anderson & Krathwohl revised the taxonomy — Creating replaced Synthesis at the top."},
+  {s:"Part-III: Bloom's Taxonomy",q:"'Remembering' in Bloom's Taxonomy involves:",o:["Understanding concepts","Applying knowledge","Recalling facts","Analyzing information"],a:2,e:"Remembering is the lowest level — recalling memorized facts and basic concepts."},
+  {s:"Part-III: Bloom's Taxonomy",q:"Which verb is associated with the 'Applying' level of Bloom's Taxonomy?",o:["Define","Analyze","Use","Evaluate"],a:2,e:"Action verbs for Applying include: use, execute, implement, demonstrate."},
+  {s:"Part-III: Bloom's Taxonomy",q:"Bloom's Taxonomy primarily helps in:",o:["Class scheduling","Designing learning objectives","Building infrastructure","Administrative tasks"],a:1,e:"Bloom's Taxonomy guides teachers in writing measurable learning objectives at different cognitive levels."},
+  {s:"Part-III: Bloom's Taxonomy",q:"Which level comes right after 'Understanding' in revised Bloom's Taxonomy?",o:["Remembering","Analyzing","Applying","Evaluating"],a:2,e:"Revised Bloom's order: Remember → Understand → Apply → Analyze → Evaluate → Create."},
+  {s:"Part-II: Data Comm & Networking",q:"Which topology connects all nodes to a central hub?",o:["Bus","Ring","Star","Mesh"],a:2,e:"In a star topology, all devices connect to a central hub or switch."},
+  {s:"Part-II: Data Comm & Networking",q:"HTTPS uses which port by default?",o:["80","21","443","25"],a:2,e:"HTTPS (secure HTTP) uses port 443 by default."},
+  {s:"Part-II: Hardware/Software",q:"The purpose of BIOS is to:",o:["Run application software","Manage internet connections","Initialize hardware at startup","Store user files"],a:2,e:"BIOS (Basic Input/Output System) initializes hardware components when the computer starts."},
+  {s:"Part-II: Hardware/Software",q:"Which bus carries data between CPU and memory?",o:["Address bus","Control bus","Data bus","Power bus"],a:2,e:"The data bus carries actual data between the CPU and memory/peripherals."},
+  {s:"Part-II: Oracle/PLSQL",q:"Which SQL function returns the number of rows?",o:["SUM()","AVG()","COUNT()","MAX()"],a:2,e:"COUNT() returns the number of rows that match a specified condition."},
+  {s:"Part-II: System Analysis & Design",q:"Use Case diagrams are part of which modeling language?",o:["DFD","ERD","UML","BPMN"],a:2,e:"Use Case diagrams are part of UML (Unified Modeling Language)."},
+  {s:"Part-II: C/C++ Language",q:"Which operator is used to access members of a structure through a pointer?",o:[".","->","::","*"],a:1,e:"The arrow operator (->) accesses structure members through a pointer."},
+  {s:"Part-III: Teaching",q:"Bloom's Taxonomy level targeted when a student 'compares two algorithms' is:",o:["Remembering","Understanding","Applying","Analyzing"],a:3,e:"Comparing requires breaking down information to find differences — this is Analyzing."},
+  {s:"Part-II: Web Programming",q:"Which keyword declares a variable in modern JavaScript (block-scoped)?",o:["var","int","let","dim"],a:2,e:"'let' declares a block-scoped variable in ES6+ JavaScript."},
+  {s:"Part-III: Classroom Management",q:"A teacher who respects students' opinions and encourages participation uses which style?",o:["Authoritarian","Permissive","Democratic","Laissez-faire"],a:2,e:"A democratic teaching style involves shared decision-making and mutual respect."},
+];
+
+let current = 0;
+let answers = new Array(100).fill(-1);
+let revealed = new Array(100).fill(false);
+let timerInterval = null;
+let secondsLeft = 90 * 60;
+let testStarted = false;
+
+function startTest() {
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('test-screen').style.display = 'block';
+  buildPalette();
+  renderQ();
+  startTimer();
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    updateTimerDisplay();
+    if (secondsLeft <= 0) { clearInterval(timerInterval); submitTest(); }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  const el = document.getElementById('timer');
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  if (secondsLeft < 600) el.classList.add('warn'); else el.classList.remove('warn');
+}
+
+function buildPalette() {
+  const p = document.getElementById('palette');
+  p.innerHTML = '';
+  for (let i = 0; i < 100; i++) {
+    const d = document.createElement('div');
+    d.className = 'pq' + (i === 0 ? ' current' : '');
+    d.id = 'pq' + i;
+    d.textContent = i + 1;
+    d.onclick = (()=>{ const idx=i; return ()=>goTo(idx); })();
+    p.appendChild(d);
+  }
+}
+
+function renderQ() {
+  const q = ALL_QUESTIONS[current];
+  const area = document.getElementById('q-area');
+  const selected = answers[current];
+  area.innerHTML = `
+    <div class="q-card">
+      <div class="section-badge">${q.s}</div>
+      <div class="q-meta">Question ${current + 1} of 100</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="opts">
+        ${q.o.map((opt, i) => {
+          let cls = 'opt';
+          if (revealed[current]) {
+            if (i === q.a) cls += ' correct';
+            else if (i === selected && i !== q.a) cls += ' wrong';
+          } else {
+            if (i === selected) cls += ' selected';
+          }
+          return `<button class="${cls}" onclick="selectOpt(${i})">${String.fromCharCode(65+i)}. ${opt}</button>`;
+        }).join('')}
+      </div>
+      <div class="explanation ${revealed[current] ? 'show' : ''}" id="expl">${q.e}</div>
+    </div>
+  `;
+  document.getElementById('q-counter').textContent = `${current + 1} / 100`;
+  document.getElementById('prog').style.width = `${(current + 1)}%`;
+  updatePalette();
+  updateStats();
+}
+
+function selectOpt(i) {
+  if (revealed[current]) return;
+  answers[current] = i;
+  revealed[current] = true;
+  renderQ();
+}
+
+function updatePalette() {
+  for (let i = 0; i < 100; i++) {
+    const el = document.getElementById('pq' + i);
+    if (!el) continue;
+    el.className = 'pq';
+    if (answers[i] !== -1) el.classList.add('answered');
+    if (i === current) el.classList.add('current');
+  }
+}
+
+function updateStats() {
+  const answered = answers.filter(a => a !== -1).length;
+  let correct = 0, wrong = 0;
+  for (let i = 0; i < 100; i++) {
+    if (answers[i] === -1) continue;
+    if (answers[i] === ALL_QUESTIONS[i].a) correct++;
+    else wrong++;
+  }
+  const score = correct - (wrong * 0.25);
+  document.getElementById('s-answered').textContent = answered;
+  document.getElementById('s-correct').textContent = correct;
+  document.getElementById('s-wrong').textContent = wrong;
+  document.getElementById('s-score').textContent = score.toFixed(2);
+}
+
+function goTo(idx) { current = idx; renderQ(); }
+function prevQ() { if (current > 0) { current--; renderQ(); } }
+function nextQ() { if (current < 99) { current++; renderQ(); } }
+
+function submitTest() {
+  clearInterval(timerInterval);
+  document.getElementById('test-screen').style.display = 'none';
+  const rs = document.getElementById('result-screen');
+  rs.style.display = 'block';
+  let correct = 0, wrong = 0, skipped = 0;
+  for (let i = 0; i < 100; i++) {
+    if (answers[i] === -1) { skipped++; continue; }
+    if (answers[i] === ALL_QUESTIONS[i].a) correct++;
+    else wrong++;
+  }
+  const score = correct - (wrong * 0.25);
+  const pct = score;
+  let grade = pct >= 80 ? 'Excellent' : pct >= 60 ? 'Good' : pct >= 40 ? 'Average' : 'Needs Improvement';
+  let gradeColor = pct >= 80 ? '#639922' : pct >= 60 ? '#378ADD' : pct >= 40 ? '#BA7517' : '#E24B4A';
+  rs.innerHTML = `
+    <div class="result-card">
+      <div style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 8px;">Final Score</div>
+      <div class="result-score" style="color: ${gradeColor}">${score.toFixed(2)}</div>
+      <div class="result-label">out of 100 &nbsp;|&nbsp; <span style="color:${gradeColor};font-weight:500">${grade}</span></div>
+      <div class="result-grid">
+        <div class="result-metric">
+          <div class="val" style="color:#639922">${correct}</div>
+          <div class="lbl">Correct (+${correct})</div>
+        </div>
+        <div class="result-metric">
+          <div class="val" style="color:#E24B4A">${wrong}</div>
+          <div class="lbl">Wrong (−${(wrong*0.25).toFixed(2)})</div>
+        </div>
+        <div class="result-metric">
+          <div class="val">${skipped}</div>
+          <div class="lbl">Skipped</div>
+        </div>
+      </div>
+      <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.5rem;">
+        Marking: +1 per correct &nbsp;|&nbsp; −0.25 per wrong &nbsp;|&nbsp; 0 for skipped
+      </div>
+      <button class="btn primary" onclick="retakeTest()">Retake Test ↗</button>
+    </div>
+  `;
+}
+
+function retakeTest() {
+  answers = new Array(100).fill(-1);
+  revealed = new Array(100).fill(false);
+  current = 0;
+  secondsLeft = 90 * 60;
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('test-screen').style.display = 'block';
+  buildPalette();
+  renderQ();
+  updateTimerDisplay();
+  startTimer();
+}
+</script>

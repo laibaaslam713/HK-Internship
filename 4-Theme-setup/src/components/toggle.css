@@ -1,0 +1,133 @@
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-switch {
+  width: 50px;
+  height: 26px;
+  background: #d1d5db;
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-switch.active {
+  background: #4f46e5;
+}
+
+.toggle-circle {
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  transition: all 0.3s ease;
+}
+
+.toggle-switch.active .toggle-circle {
+  transform: translateX(24px);
+}
+.toggle-container svg {
+  color: #555;
+  transition: 0.3s;
+}
+
+body.dark .toggle-container svg {
+  color: #facc15;
+}
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 10px;
+  border: 1.5px solid var(--color-navbar-border);
+  border-radius: 999px;
+  background-color: var(--color-navbar);
+  color: var(--color-text);
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition:
+    background-color var(--theme-speed) var(--ease),
+    border-color     var(--theme-speed) var(--ease),
+    color            var(--theme-speed) var(--ease),
+    transform        0.18s ease,
+    box-shadow       0.2s ease;
+}
+ 
+.toggle-btn:hover {
+  background-color: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: scale(1.03);
+  box-shadow: 0 2px 10px rgba(200,82,26,0.15);
+}
+ 
+.toggle-btn:active {
+  transform: scale(0.97);
+}
+ 
+.toggle-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .toggle-switch {
+    width: 40px;
+    height: 20px;
+  }
+
+  .toggle-circle {
+    width: 16px;
+    height: 16px;
+  }
+
+  .toggle-switch.active .toggle-circle {
+    transform: translateX(20px);
+  }
+
+  .toggle-container {
+    gap: 6px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .toggle-switch {
+    width: 46px;
+    height: 24px;
+  }
+
+  .toggle-circle {
+    width: 20px;
+    height: 20px;
+  }
+
+  .toggle-switch.active .toggle-circle {
+    transform: translateX(22px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .toggle-switch {
+    width: 50px;
+    height: 26px;
+  }
+
+  .toggle-circle {
+    width: 22px;
+    height: 22px;
+  }
+
+  .toggle-switch.active .toggle-circle {
+    transform: translateX(24px);
+  }
+}
