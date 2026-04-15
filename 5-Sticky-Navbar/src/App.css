@@ -268,7 +268,7 @@ section:nth-child(even) {
 
 .btn-primary:hover {
   background: var(--primary-hover);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
 
@@ -290,7 +290,7 @@ section:nth-child(even) {
 .btn-ghost:hover {
   background: var(--primary);
   color: white;
-  transform: translateY(-2px);
+  transform: translateY(-4px);
 }
 
 .about-grid {
