@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://devcraft.studio/sitemap.xml
+Sitemap: https://dev-studio-b7d3ef.netlify.app/sitemap.xml
