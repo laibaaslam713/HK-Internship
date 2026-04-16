@@ -12,3 +12,6 @@
 
 ## 5. Sticky Navbar with smooth scrolling
 ###   Demo (https://hk-internship-5-sticky-navbar.vercel.app/)
+
+## 6. SEO Optimization
+###   Demo (https://dev-studio-b7d3ef.netlify.app/)
