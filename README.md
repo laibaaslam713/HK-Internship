@@ -9,3 +9,6 @@
 
 ## 4. Theme Toggle
 ###   Demo (https://hk-internship-4-theme-setup.vercel.app/)
+
+## 5. Sticky Navbar with smooth scrolling
+###   Demo (https://hk-internship-5-sticky-navbar.vercel.app/)
