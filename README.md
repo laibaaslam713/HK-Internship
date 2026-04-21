@@ -15,3 +15,6 @@
 
 ## 6. SEO Optimization
 ###   Demo (https://dev-studio-b7d3ef.netlify.app/)
+
+## 7. Dynamic Team Page-Fetch Data from API
+###   Demo (https://hk-internship-7-dynamic-team-page.vercel.app/)
