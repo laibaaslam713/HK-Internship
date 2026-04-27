@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 const ProfileModal = ({ member, onClose }) => {
-  // ESC key se close
+  
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();
@@ -10,7 +10,6 @@ const ProfileModal = ({ member, onClose }) => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, [onClose]);
 
-  // Outside click se close
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) onClose();
   };

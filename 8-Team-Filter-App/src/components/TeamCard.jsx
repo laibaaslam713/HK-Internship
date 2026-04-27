@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProfileModal from "./ProfileModal";  // Naya modal component import karo
+import ProfileModal from "./ProfileModal";  
 
 const TeamCard = ({ member }) => {
   const [selectedMember, setSelectedMember] = useState(null);
