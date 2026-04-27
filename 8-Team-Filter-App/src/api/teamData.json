@@ -1,0 +1,12 @@
+[
+  {
+    "image": "https://example.com/image1.jpg",
+    "name": "John Doe",
+    "role": "Frontend Developer",
+    "skills": "React, JavaScript, CSS",
+    "bio": "Experienced frontend developer with 5+ years in React ecosystem.",
+    "linkedin": "https://linkedin.com/in/johndoe",
+    "github": "https://github.com/johndoe",
+    "twitter": "https://twitter.com/johndoe"
+  }
+]   
