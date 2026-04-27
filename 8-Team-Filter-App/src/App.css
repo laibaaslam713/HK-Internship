@@ -392,16 +392,31 @@ body {
   transform: scale(1.04);
 }
 
-.profile-btn{
-  background-color: #1A2A3A;
-  padding: 10px;
+.profile-btn {
+  background-color: #1a2a3a;
+  color: #ffffff;
+  padding: 10px 16px;
   margin-top: 10px;
-  color: white;
   border: none;
-  border-radius: 20px;
-  font-size: smaller;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
 
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.profile-btn:hover {
+  background-color: #e1f5ee;
+  color: #1a2a3a;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.profile-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
 .modal-backdrop {
@@ -427,6 +442,7 @@ body {
   background: var(--white);
   border: 1px solid var(--gray-200);
   border-radius: var(--radius-xl);
+  padding: 30px;
   width: 100%;
   max-width: 480px;
   overflow: hidden;
