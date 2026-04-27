@@ -1,13 +1,7 @@
-/* ============================================================
-   IMPORTS
-   ============================================================ */
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
 
-/* ============================================================
-   TOKENS
-   ============================================================ */
 :root {
-  /* Brand palette */
   --navy-950: #0c1520;
   --navy-900: #1a2a3a;
   --navy-800: #1e3348;
@@ -24,7 +18,6 @@
   --red-600:  #b91c1c;
   --red-50:   #fef2f2;
 
-  /* Neutrals */
   --white:    #ffffff;
   --gray-50:  #f8fafc;
   --gray-100: #f1f5f9;
@@ -35,38 +28,30 @@
   --gray-700: #334155;
   --gray-900: #0f172a;
 
-  /* Surfaces */
   --surface-page:  #eef2f7;
   --surface-card:  #ffffff;
   --surface-glass: rgba(255, 255, 255, 0.82);
 
-  /* Typography */
   --font-sans:  'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-serif: 'DM Serif Display', Georgia, serif;
 
-  /* Radius */
   --radius-sm:   8px;
   --radius-md:   12px;
   --radius-lg:   20px;
   --radius-xl:   28px;
   --radius-pill: 999px;
 
-  /* Shadows */
   --shadow-xs:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
   --shadow-sm:  0 2px 8px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.05);
   --shadow-md:  0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.05);
   --shadow-lg:  0 12px 32px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
 
-  /* Motion */
   --ease-out:   cubic-bezier(0.2, 0, 0, 1);
   --duration-fast:   150ms;
   --duration-normal: 220ms;
   --duration-slow:   350ms;
 }
 
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -87,18 +72,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ============================================================
-   LAYOUT
-   ============================================================ */
 .app {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 28px 64px;
 }
 
-/* ============================================================
-   NAVBAR
-   ============================================================ */
 .navbar {
   background: var(--navy-900);
   padding: 0 36px;
@@ -136,9 +115,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* ============================================================
-   PAGE HEADER
-   ============================================================ */
 .app h1 {
   text-align: center;
   font-family: var(--font-serif);
@@ -159,9 +135,6 @@ body {
   line-height: 1.5;
 }
 
-/* ============================================================
-   CONTROLS BAR
-   ============================================================ */
 .controls {
   background: var(--surface-glass);
   backdrop-filter: blur(16px);
@@ -177,7 +150,6 @@ body {
   gap: 12px;
 }
 
-/* Search input */
 .controls input[type="search"],
 .controls input[type="text"] {
   flex: 1;
@@ -205,7 +177,6 @@ body {
   color: var(--gray-400);
 }
 
-/* Filters group */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -259,7 +230,6 @@ body {
   border-color: var(--navy-800);
 }
 
-/* Clear button */
 .clear-btn {
   height: 38px;
   padding: 0 20px;
@@ -294,18 +264,12 @@ body {
   box-shadow: none;
 }
 
-/* ============================================================
-   CARD GRID
-   ============================================================ */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
 }
 
-/* ============================================================
-   MEMBER CARD
-   ============================================================ */
 .card {
   --accent:       #1D9E75;
   --accent-light: #e1f5ee;
@@ -326,7 +290,6 @@ body {
     border-color var(--duration-normal) var(--ease-out);
 }
 
-/* Colored header band */
 .card::before {
   content: '';
   position: absolute;
@@ -336,7 +299,6 @@ body {
   z-index: 0;
 }
 
-/* Subtle shimmer on hover */
 .card::after {
   content: '';
   position: absolute;
@@ -363,7 +325,6 @@ body {
   transform: translateY(-3px);
 }
 
-/* Avatar */
 .avatar {
   position: relative;
   z-index: 1;
@@ -400,7 +361,6 @@ body {
   margin: 0 0 18px;
 }
 
-/* Skills chips */
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -444,9 +404,6 @@ body {
 
 }
 
-/* ============================================================
-   MODAL
-   ============================================================ */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -489,7 +446,6 @@ body {
   }
 }
 
-/* Header */
 .modal-header {
   display: flex;
   align-items: center;
@@ -529,7 +485,6 @@ body {
   margin: 0;
 }
 
-/* Body */
 .modal-content {
   padding: 18px 20px;
 }
@@ -550,7 +505,6 @@ body {
   margin: 0 0 10px;
 }
 
-/* Skills in modal */
 .modal-skills {
   display: flex;
   flex-wrap: wrap;
@@ -573,7 +527,6 @@ body {
   background: var(--gray-200);
 }
 
-/* Social links */
 .social-links {
   display: flex;
   gap: 8px;
@@ -603,7 +556,6 @@ body {
   box-shadow: var(--shadow-xs);
 }
 
-/* Footer */
 .modal-footer {
   display: flex;
   justify-content: flex-end;
@@ -635,7 +587,6 @@ body {
   box-shadow: var(--shadow-xs);
 }
 
-/* Close icon (×) in corner */
 .close-icon-btn {
   position: absolute;
   top: 16px;
@@ -665,9 +616,6 @@ body {
   border-color: var(--gray-300);
 }
 
-/* ============================================================
-   CARD ENTRANCE ANIMATION
-   ============================================================ */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -692,9 +640,6 @@ body {
 .card:nth-child(7)  { animation-delay: 280ms; }
 .card:nth-child(8)  { animation-delay: 320ms; }
 
-/* ============================================================
-   EMPTY STATE
-   ============================================================ */
 .empty-state {
   grid-column: 1 / -1;
   text-align: center;
@@ -712,25 +657,16 @@ body {
   color: var(--gray-400);
 }
 
-/* ============================================================
-   SCROLLBAR
-   ============================================================ */
 ::-webkit-scrollbar { width: 7px; height: 7px; }
 ::-webkit-scrollbar-track { background: var(--gray-100); border-radius: 99px; }
 ::-webkit-scrollbar-thumb { background: var(--navy-700); border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--navy-900); }
 
-/* ============================================================
-   FOCUS RING (accessibility)
-   ============================================================ */
 :focus-visible {
   outline: 2px solid var(--navy-700);
   outline-offset: 2px;
 }
 
-/* ============================================================
-   RESPONSIVE — tablet
-   ============================================================ */
 @media (max-width: 900px) {
   .app {
     padding: 0 20px 48px;
@@ -762,9 +698,6 @@ body {
   }
 }
 
-/* ============================================================
-   RESPONSIVE — mobile
-   ============================================================ */
 @media (max-width: 640px) {
   .app {
     padding: 0 14px 40px;
@@ -843,9 +776,6 @@ body {
   }
 }
 
-/* ============================================================
-   RESPONSIVE — very small
-   ============================================================ */
 @media (max-width: 380px) {
   .filters {
     gap: 5px;
