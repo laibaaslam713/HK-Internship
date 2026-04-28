@@ -19,5 +19,5 @@
 ## 7. Dynamic Team Page-Fetch Data from API
 ###   Demo (https://hk-internship-7-dynamic-team-page.vercel.app/)
 
-## 8. Team Member
+## 8-9. Team Member
 ###   Demo (https://hk-internship-team-member-profile.vercel.app/)
