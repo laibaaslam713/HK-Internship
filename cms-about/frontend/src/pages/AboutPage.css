@@ -135,7 +135,7 @@
 }
 .mv-accent-right { left: auto; right: 0; }
 
-/* Footer strip */
+/* Footer */
 .about-footer-strip {
   background: var(--cream);
   border-top: 1px solid var(--border);

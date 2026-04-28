@@ -57,7 +57,6 @@
 }
 .section-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
 
-/* Char count */
 .form-label {
   display: flex; align-items: center; justify-content: space-between;
 }
@@ -68,7 +67,6 @@
 }
 .form-hint { font-size: 0.78rem; color: var(--muted); }
 
-/* Image area */
 .image-preview-box {
   aspect-ratio: 16/9;
   border-radius: 8px;
@@ -89,7 +87,6 @@
 }
 .or-divider { color: var(--muted); font-size: 0.8rem; flex-shrink: 0; }
 
-/* Preview card */
 .preview-card { position: sticky; top: calc(60px + 88px + 1rem); }
 .preview-body { padding: 1.25rem; }
 .mini-preview {
@@ -119,7 +116,6 @@
   border-radius: 4px; font-weight: 500;
 }
 
-/* Footer */
 .form-footer {
   display: flex; justify-content: flex-end; gap: 1rem;
   margin-top: 2rem;
@@ -127,7 +123,6 @@
   border-top: 1px solid var(--border);
 }
 
-/* Dark spinner variant */
 .spinner-dark {
   border-color: rgba(0,0,0,0.2);
   border-top-color: var(--ink);

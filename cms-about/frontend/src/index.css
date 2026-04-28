@@ -31,12 +31,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Scrollbar ─── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--cream); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-/* ─── Nav ─── */
 .nav {
   position: sticky; top: 0; z-index: 100;
   background: var(--ink);
@@ -67,11 +65,9 @@ body {
 }
 .nav-link:hover, .nav-link.active { color: var(--white); background: rgba(255,255,255,0.1); }
 
-/* ─── Layout ─── */
 .page { min-height: calc(100vh - 60px); }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 
-/* ─── Buttons ─── */
 .btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.65rem 1.4rem;
@@ -102,7 +98,6 @@ body {
 .btn-sm { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
 .btn-lg { padding: 0.85rem 2rem; font-size: 1rem; }
 
-/* ─── Cards ─── */
 .card {
   background: var(--white);
   border: 1px solid var(--border);
@@ -110,7 +105,6 @@ body {
   box-shadow: var(--shadow);
 }
 
-/* ─── Form ─── */
 .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 .form-label {
   font-size: 0.8rem; font-weight: 500;
@@ -131,7 +125,6 @@ body {
 .form-control.error { border-color: #dc2626; }
 .form-error { color: #dc2626; font-size: 0.8rem; }
 
-/* ─── Toast ─── */
 .toast-container {
   position: fixed; bottom: 2rem; right: 2rem;
   display: flex; flex-direction: column; gap: 0.75rem;
@@ -153,7 +146,6 @@ body {
   to   { opacity: 1; transform: translateX(0); }
 }
 
-/* ─── Loading ─── */
 .spinner {
   width: 18px; height: 18px;
   border: 2px solid rgba(255,255,255,0.3);
@@ -163,7 +155,6 @@ body {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ─── Badge ─── */
 .badge {
   display: inline-block;
   padding: 0.2rem 0.65rem;
@@ -173,13 +164,11 @@ body {
 .badge-gold { background: var(--gold-light); color: #7a5a1a; }
 .badge-sage { background: #ddeedd; color: #2d5a32; }
 
-/* ─── Divider ─── */
 .divider {
   height: 1px; background: var(--border);
   border: none; margin: 1.5rem 0;
 }
 
-/* ─── Responsive ─── */
 @media (max-width: 768px) {
   .nav { padding: 0 1rem; }
   .container { padding: 0 1rem; }

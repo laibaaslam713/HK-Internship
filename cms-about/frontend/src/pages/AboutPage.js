@@ -37,7 +37,6 @@ export default function AboutPage() {
   return (
     <div className="about-page">
 
-      {/* Hero */}
       <section className="about-hero">
         <div className="hero-bg-text" aria-hidden="true">About</div>
         <div className="container">
@@ -61,7 +60,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Mission & Vision */}
       <section className="mv-section">
         <div className="container">
           <div className="mv-grid">
@@ -82,7 +80,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Footer strip */}
       <section className="about-footer-strip">
         <div className="container">
           <p className="footer-stamp">

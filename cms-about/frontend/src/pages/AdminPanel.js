@@ -146,7 +146,6 @@ export default function AdminPanel() {
       <div className="container">
         <form className="admin-form" onSubmit={handleSubmit} noValidate>
           <div className="form-grid">
-            {/* LEFT COLUMN */}
             <div className="form-left">
 
               <section className="admin-section card">
@@ -231,7 +230,6 @@ export default function AdminPanel() {
               </section>
             </div>
 
-            {/* RIGHT COLUMN */}
             <div className="form-right">
               <section className="admin-section card">
                 <div className="section-header">
